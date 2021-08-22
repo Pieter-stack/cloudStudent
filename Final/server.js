@@ -11,14 +11,18 @@ var logger = require('./public/logger.js');
 app.use(logger);
 
 var data = require("./public/data-1.js");
+const { classes } = require('./public/data-1.js');
 
 
-app.param('name', function (request, response, next){
-    request.lowerName = request.params.name.toLowerCase();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.param('name', function (req, res, next){
+    req.lowerName = req.params.name.toLowerCase();
     next();
 });
 
-        var classid=0;
+        var classid= 0;
         var teachers=[];
         var learners=[];
         var timesA = [];
@@ -36,7 +40,8 @@ app.param('name', function (request, response, next){
 /////////////////////////       end of variables      /////////////////////////
 
 app.get('/', (req,res) => {
-    res.send('<h1>Cloud Student</h1>');
+    res.send(__dirname + '/public/index.html');
+    
 });
 
 app.get('/home', function(req,res){
@@ -138,8 +143,12 @@ app.get('/api/class', function(req, res){
                 res.status(404).json("Cannot find any classes with the id ");
             };
 
-    
-
+            meetLink = [];
+            subject = [];
+            classroom = [];
+            timesA = [];
+            learners =[];
+            teachers = [];
 });
 
 // list of classes by one teacher
@@ -169,13 +178,14 @@ app.get('/api/teacher/:name', function(req, res){
     if(teacherid === null){
         res.status(404).json("No teacher with name:'" + req.params.name + "' found.")
     };
-
+    teacherClasses = [];
 });
 
 
 // list of classes taken by one learner
 
 var learnerClasses = [];
+var teacherClasses2 = []
 
 
 app.get('/api/learners/:name', function(req, res){
@@ -200,8 +210,61 @@ app.get('/api/learners/:name', function(req, res){
     if(learnerid === null){
         res.status(404).json("No student with name:'" + req.params.name + "' found.")
     };
-
+    learnerClasses = [];
 });
+
+app.get('/api/learners/id/:id', function(req, res){
+    var learnerid = null;
+
+    for (var i=0;i<data.learners.length; i++){
+
+        if(data.learners[i].id == req.params.id){
+           
+            console.log(data.learners[i].id);
+
+            learnerid = data.learners[i].classes;
+            for(var j=0; j < learnerid.length;j++){
+                learnerClasses.push(data.classes[data.learners[i].classes[j]-1]);
+
+            };
+            res.json(learnerClasses);
+        };
+
+    };
+    if(learnerid === null){
+        res.status(404).json("No learner with name:'" + req.params.id + "' found.")
+    };
+
+    learnerClasses=[];
+
+}); 
+
+
+app.get('/api/teacher/id/:id', function(req, res){
+    var teacherid = null;
+
+    for (var i=0;i<data.teachers.length; i++){
+
+        if(data.teachers[i].id == req.params.id){
+           
+            console.log(data.teachers[i].id);
+
+            teacherid = data.teachers[i].classes;
+            for(var j=0; j < teacherid.length;j++){
+                teacherClasses2.push(data.classes[data.teachers[i].classes[j]-1]);
+
+            };
+            res.json(teacherClasses2);
+        };
+
+    };
+    if(teacherid === null){
+        res.status(404).json("No teacher with id:'" + req.params.id + "' found.")
+    };
+
+    teacherClasses2=[];
+
+}); 
 
 
 //user id for valid email and password
@@ -235,23 +298,12 @@ for (var i=0;i<data.learners.length; i++){
 });
 
 
+//route handling login info for both students and teachers
+app.get("/api/users/", function(req, res){
 
-
-
-
-
-
-
-// app.get('/api/class', function(req, res){
-
-//     if(req.query.limit >= 0){
-//         res.json(data.classes.slice(0, req.query.limit));
-//     }else{
-//         res.json(data.classes);
-//     };
-
-
-// });
+    var allUsers={"teachers":data.teachers, "learners":data.learners}
+    res.json(allUsers);
+});
 
 
 
@@ -268,44 +320,109 @@ app.get('/api/learners', function(req, res){
 });
 
 
+/////CRUD////////
+
+app.post('/api/classes/new', (req,res) =>{
+    var id = data.classes.length +1;
+    var slot = req.body.slot;
+    var subject = req.body.subject ;
+    var group = req.body.group ;
+    var classroom =req.body.classroom;
+    var link =  req.body.link;
+
+    if (slot != "" && subject != "" && group != "" && classroom != "" && link != "" ) {
+        data.classes.push({id: id, slot: slot, subject: subject, group: group, classroom: classroom, link: link});
+        res.json("New Class added with ID: " + id);
+
+    } else {
+        res.status(406).json("Error while posting classes");
+    };
+});
+
+
+app.put('/api/classes/:id', (req,res) =>{
+    var id = req.params.id;
+    var slot = req.body.slot;
+    var subject = req.body.subject ;
+    var group = req.body.group ;
+    var classroom = req.body.classroom;
+    var link =  req.body.link;
+    console.log(classroom);
+    console.log(subject);
+
+    var classesIndex = null;
+    for(var i=0; i< data.classes.length; i++){
+        if (data.classes[i].id === parseInt(id)) {
+            classesIndex = i;
+        }
+    }
+
+    if (classesIndex == null) {
+        res.status(404).json("No class with id " + id + " found");
+    }
+    else if(classesIndex !== null){
+        if (slot != "") {
+            data.classes[classesIndex].slot = slot;
+        }
+
+        if (subject != "") {
+            data.classes[classesIndex].subject = subject;
+        }
+        
+        if (group != "") {
+            data.classes[classesIndex].group = group;
+        }
+
+        if (classroom != "") {
+            data.classes[classesIndex].classroom = classroom;
+        }
+
+        if (link != "") {
+            data.classes[classesIndex].link = link;
+        }
+
+
+
+        res.json("Exercise with id " +id+ " updated.");
+    }
+
+
+ 
+
+});
+
+app.delete('/api/classes/:id', (req,res) =>{
+    var id = req.params.id;
+    var classesIndex = null;
+    for (var i = 0; i < data.classes.length; i++) {
+        if (data.classes[i].id === parseInt(id)) {
+            classesIndex = i;
+        }
+    }
+
+
+    if (classesIndex == null)
+    res.status(404).json("No exercise with id '" +id+ "found");
+else {
+    data.classes.splice(classesIndex, 1);
+    res.json("Exercise with id " +id+ " deleted.")
+}
+
+});
 
 
 
 
-// app.get('/api/teachers/:name', function(req, res){
 
-//     var teacher = null;
-//     var lowerName = req.params.name.toLowerCase();
-//     for(var i=0;i < data.teachers.length; i++){
-//         if(data.teachers[i].name === lowerName){
-//             teacher = data.teachers[i];
-//             res.json(teacher);
-//         };
-//     };
-//     if(teacher == null){
-//         res.status(404).json("No teacher named '" + lowerName + "' found.");
-//     };
-// });
 
-// app.get('/api/learners/:name', function(req, res){
-//     var learner = null;
-//     var lowerName = req.params.name.toLowerCase();
-//     for(var i=0;i < data.learners.length; i++){
-//         if(data.learners[i].name === lowerName){
-//             learner = data.learners[i];
-//             res.json(learner);
-//         };
-//     };
-//     if(learner == null){
-//         res.status(404).json("No teacher named '" + lowerName + "' found.");
-//     };
-// });
+
+
 
 
 ///////////////////////////////   end of api data   ///////////////////////////////////
 
-app.get('/test', cors(), function(request, response, next) {
-    response.json({msg: 'This is a CORS-enabled for a sing route'});
+app.get('/test', cors(), function(req, res, next) {
+    res.json({msg: 'This is a CORS-enabled for a sing route'});
 });
 
 app.listen(8000, function() {
