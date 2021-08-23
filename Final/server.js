@@ -330,13 +330,20 @@ app.post('/api/classes/new', (req,res) =>{
     var classroom =req.body.classroom;
     var link =  req.body.link;
 
+
+
     if (slot != "" && subject != "" && group != "" && classroom != "" && link != "" ) {
         data.classes.push({id: id, slot: slot, subject: subject, group: group, classroom: classroom, link: link});
         res.json("New Class added with ID: " + id);
+        for(var i=0; i< data.teachers.length; i++){
+             data.teachers[i].classes.push(id);
+         }
 
     } else {
         res.status(406).json("Error while posting classes");
     };
+
+
 });
 
 
@@ -347,8 +354,7 @@ app.put('/api/classes/:id', (req,res) =>{
     var group = req.body.group ;
     var classroom = req.body.classroom;
     var link =  req.body.link;
-    console.log(classroom);
-    console.log(subject);
+
 
     var classesIndex = null;
     for(var i=0; i< data.classes.length; i++){
@@ -384,6 +390,7 @@ app.put('/api/classes/:id', (req,res) =>{
 
 
         res.json("Exercise with id " +id+ " updated.");
+
     }
 
 
@@ -406,6 +413,9 @@ app.delete('/api/classes/:id', (req,res) =>{
 else {
     data.classes.splice(classesIndex, 1);
     res.json("Exercise with id " +id+ " deleted.")
+    for(var i=0; i< data.teachers.length; i++){
+        data.teachers[i].classes.shift(id);
+    }
 }
 
 });
