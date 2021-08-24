@@ -2,51 +2,26 @@
 <html>
 <head>
 	<title>Cloud Student Server</title>
-	<script>
-
-var id ="";
-var teacher = "";
-var student = "";
-var email = "";
-var password = "";
-function values(){
-       
-      id =  document.getElementById('idClass').value;
-        console.log(id);
-        teacher=  document.getElementById('teacherName').value;
-        student = document.getElementById('studentName').value;
-          email = document.getElementById('email').value ;
-          password = document.getElementById('pw').value;
-    
-}
-
-
-
-	</script>
+	
 </head>
 	<body>	
         <h1>CLOUD STUDENT</h1>	
         
-        <input type="text" onchange="values()" placeholder="ID of class" id='idClass'>
-        <input type="text"  placeholder="Teacher Name"  id='teacherName'>
-        <input type="text"  placeholder="Student Name"  id='studentName'>
-        <input type="text"  placeholder="Email"  id='email'>
-        <input type="text" placeholder="Password"  id='pw'>
 		<ul>
 		<script>
 			
 			document.write('<a href="http://localhost:8000/api/classes"><li>All Classes</li></a>');
 
-            var locid = "http://localhost:8000/api/class?class="+id;
+            var locid = "http://localhost:8000/api/class?class=1";
 			document.write('<a href="'+locid+'"><li>Classes with spesific ID</li></a>');
 
-            var locteacher = "http://localhost:8000/api/teacher/"+teacher;
+            var locteacher = "http://localhost:8000/api/teacher/Mr Hunt";
 			document.write('<a href="' + locteacher + '"><li>Classes of spesific teacher</li></a>');
 
-            var locstudent = "http://localhost:8000/api/learners/"+student;
+            var locstudent = "http://localhost:8000/api/learners/Ian Reid";
 			document.write('<a href="' + locstudent + '"><li>Classes of spesific student</li></a>');
 
-            var locuser = "http://localhost:8000/api/user/"+ email+"/"+password;
+            var locuser = "http://localhost:8000/api/user/hunt@highschool.com/1234";
 			document.write('<a href="' + locuser + '"><li>User ID of correct email and password</li></a>');
 
 		</script>

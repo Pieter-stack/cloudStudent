@@ -228,6 +228,7 @@ app.get('/api/learners/id/:id', function(req, res){
 
             };
             res.json(learnerClasses);
+            
         };
 
     };
