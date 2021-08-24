@@ -161,7 +161,6 @@ For this project I did some research on online classroom apps and then I put tog
 I made multiple wireframes and transformed them into initial ideas:
   <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/wireframes.png" alt="mockup" width="" height="600" align="center">
 
-I didn't implement the themes into my project at this time.
 <br></br>
 
 ### User-flow diagram
