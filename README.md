@@ -12,7 +12,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Pieter-stack/cloudStudent">
-    <img src="https://github.com/Pieter-stack/cloudStudent/images/logo(2).png" alt="Logo" width="100%" height="150">
+    <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/logo%20(2).png" alt="Logo" width="100%" height="500">
   </a>
 
   <h3 align="center">Cloud Student</h3>
@@ -73,7 +73,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
- <img src="cloudStudent/images/logo(2).png" alt="mockup" width="" height="600" align="center">
+ <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/logo%20(2).png" alt="mockup" width="" height="600" align="center">
 
 <br></br>
 
@@ -153,20 +153,19 @@ See the [open issues](https://github.com/Pieter-stack/cloudStudent/issues) for a
 For this project I did some research on online classroom apps and then I put together a moodboard of all my findings:
 
 
-  <img src="/images/Moodboard.png" alt="mockup" width="80%" height="600" align="center">
+  <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/Moodboard.png" alt="mockup" width="80%" height="600" align="center">
 <br></br>
 
 ### Wireframes
 
 I made multiple wireframes and transformed them into initial ideas:
-  <img src="/images/wireframes.png" alt="mockup" width="" height="600" align="center">
+  <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/wireframes.png" alt="mockup" width="" height="600" align="center">
 
-I didn't implement the themes into my project at this time.
 <br></br>
 
 ### User-flow diagram
 After that, I created a simple userflow diagram, which depicts the basic information flow when the user interacts with the website.
-  <img src="/images/UserFlow.png" alt="mockup" width="" height="600" align="center">
+  <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/UserFlow.png" alt="mockup" width="" height="600" align="center">
 <br></br>
 
 # Development process and implementation
@@ -183,7 +182,7 @@ Roadmap of the last 8 weeks, here's a visual representation of my success and ch
 
 This project can still be improved by makeing the slots better and adding a search by day for the students to only classes on a spesific day.
 
-_<img src="/images/wireframes.png" alt="mockup" width="700" height="" align="center">
+_<img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/logo%20(2).png" alt="mockup" width="700" height="" align="center">
   <br></br>
 _For more examples, please refer to the [Documentation](https://example.com)_
 
