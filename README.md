@@ -73,7 +73,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
- <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/logo%20(2).png" alt="mockup" width="" height="600" align="center">
+ <img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/mockup1.png" alt="mockup" width="" height="600" align="center">
 
 <br></br>
 
@@ -182,7 +182,7 @@ Roadmap of the last 8 weeks, here's a visual representation of my success and ch
 
 This project can still be improved by makeing the slots better and adding a search by day for the students to only classes on a spesific day.
 
-_<img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/logo%20(2).png" alt="mockup" width="700" height="" align="center">
+_<img src="https://github.com/Pieter-stack/cloudStudent/blob/main/Images/mockup2.png" alt="mockup" width="700" height="" align="center">
   <br></br>
 _For more examples, please refer to the [Documentation](https://example.com)_
 
