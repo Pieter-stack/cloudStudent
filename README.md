@@ -220,8 +220,8 @@ Project Link: [https://github.com/Pieter-stack/cloudStudent](https://github.com/
 ## Acknowledgements
 
 * [https://github.com/ArmandPret/rona]()
-* [https://smartmockups.com/mockups/laptop]()
-* [https://smartmockups.com/mockups/desktop]()
+* [https://www.freepik.com/search?dates=any&format=search&page=1&query=Mockup%20pc&sort=popular&type=psd]()
+
 
 
 
